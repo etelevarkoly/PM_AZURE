@@ -39,6 +39,7 @@ az network vnet create --name $VNET `
 --address-prefix 172.16.0.0/16 `
 --subnet-name $SUBNET `
 --subnet-prefix 172.16.0.0/24
+Write-Host "VNET and SUBNET created."
 
 # create Win 2019 srv for AD DS
 Write-Host "deploying DC1 VM..."
@@ -59,6 +60,7 @@ az vm create --name $VM_DC1 `
 --eviction-policy Deallocate `
 --priority Spot `
 --max-price -1
+Write-Host "DC1 deploy OK."
 
 # create core srv
 Write-Host "deploying core srv VM..."
@@ -79,6 +81,7 @@ az vm create --name $VM_FS1 `
 --eviction-policy Deallocate `
 --priority Spot `
 --max-price -1
+Write-Host "FS1 deploy OK."
 
 # create extra disk for core srv
 Write-Host "creating and attaching extra disk for core srv..."
@@ -104,6 +107,7 @@ az vm create --name $VM_CLIENT `
 --eviction-policy Deallocate `
 --priority Spot `
 --max-price -1
+Write-Host "W10 client deploy OK."
 
 # set ip config for DC1
 Write-Host "setting up DC1 VM ip config..."
@@ -113,6 +117,7 @@ az network nic ip-config update `
 --name $DC1_IP_Config `
 --nic-name $DC1_NIC `
 --private-ip-address $DC1_PRIVATE_IP
+Write-Host "DC1 ip config OK."
 
 # set ip config for FS1
 Write-Host "setting up FS1 VM ip config..."
@@ -122,6 +127,7 @@ az network nic ip-config update `
 --name $FS1_IP_Config `
 --nic-name $FS1_NIC `
 --private-ip-address $FS1_PRIVATE_IP
+Write-Host "FS1 ip config OK."
 
 # set ip config for W10 client
 Write-Host "setting up W10 CLIENT VM ip config..."
@@ -131,95 +137,64 @@ az network nic ip-config update `
 --name $W10_IP_Config `
 --nic-name $W10_NIC `
 --private-ip-address $W10_PRIVATE_IP
-
+Write-Host "w10 client ip config OK."
 
 
 # insert wget to download scripts to vms
 # download AD DS config script
 Write-Host "downloading malware..."
-az vm run-command invoke `
--name $VM_DC1 `
---command-id RunPowerShellScript `
---scripts $02_AD_DS_config
+az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts $02_AD_DS_config
 
 # download DC DNS & DHCP config script
-az vm run-command invoke `
--name $VM_DC1 `
---command-id RunPowerShellScript `
---scripts $03_DC1_DNS_DHCP_config
+az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts $03_DC1_DNS_DHCP_config
 
 # download DC OU & user manage script
-az vm run-command invoke `
--name $VM_DC1 `
---command-id RunPowerShellScript `
---scripts $04_DC1_OU_USERS
+az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts $04_DC1_OU_USERS
 
 # download FS1 config & disk script
-az vm run-command invoke `
--name $VM_FS1 `
---command-id RunPowerShellScript `
---scripts $05_FS1_config
+az vm run-command invoke --name $VM_FS1 --command-id RunPowerShellScript --scripts $05_FS1_config
 
 # download FS1 folder and SMB script
-az vm run-command invoke `
--name $VM_FS1 `
---command-id RunPowerShellScript `
---scripts $06_FS1_folders_SMB
+az vm run-command invoke --name $VM_FS1 --command-id RunPowerShellScript --scripts $06_FS1_folders_SMB
 
 # download w10 client config script
-az vm run-command invoke `
--name $VM_CLIENT `
---command-id RunPowerShellScript `
---scripts $07_W10_config
-
+az vm run-command invoke --name $VM_CLIENT --command-id RunPowerShellScript --scripts $07_W10_config
 
 
 # run scripts on VMs
 # AD DS config
-az vm run-command invoke `
--name $VM_DC1 `
---command-id RunPowerShellScript `
---scripts "C:\02_AD_DS_config.ps1"
+Write-Host "running scripts on VMs..."
+az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts "C:\02_AD_DS_config.ps1"
 
+Write-Host "AD DS script done."
 Write-Host "wait 5 min for DC1 to restart..."
 Start-Sleep 300
 
 # DC1 dns and dhcp config script
-az vm run-command invoke `
--name $VM_DC1 `
---command-id RunPowerShellScript `
---scripts "C:\03_DC1_DNS_DHCP_config.ps1"
+Write-Host "running DC1 dns dhcp script..."
+az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts "C:\03_DC1_DNS_DHCP_config.ps1"
 
 # DC1 OU and User creator script
-az vm run-command invoke `
--name $VM_DC1 `
---command-id RunPowerShellScript `
---scripts "C:\04_DC1_OU_USERS.ps1"
+Write-Host "running DC1 ou and user script..."
+az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts "C:\04_DC1_OU_USERS.ps1"
 
 # FS1 config script
-az vm run-command invoke `
--name $VM_FS1 `
---command-id RunPowerShellScript `
---scripts "C:\05_FS1_config.ps1"
+Write-Host "running FS1 config script..."
+az vm run-command invoke --name $VM_FS1 --command-id RunPowerShellScript --scripts "C:\05_FS1_config.ps1"
 
 Write-Host "wait 5 min for FS1 to restart..."
 Start-Sleep 300
 
 # FS1 folder and SMB script
-az vm run-command invoke `
--name $VM_FS1 `
---command-id RunPowerShellScript `
---scripts "C:\06_FS1_folders_SMB.ps1"
+Write-Host "running FS1 folder and SMB script..."
+az vm run-command invoke --name $VM_FS1 --command-id RunPowerShellScript --scripts "C:\06_FS1_folders_SMB.ps1"
 
 # w10 client script
-az vm run-command invoke `
--name $VM_CLIENT `
---command-id RunPowerShellScript `
---scripts "C:\07_W10_config.ps1"
+Write-Host "running w10 client config script..."
+az vm run-command invoke --name $VM_CLIENT --command-id RunPowerShellScript --scripts "C:\07_W10_config.ps1"
 
 # w10 client restarts here, so chill
-
-Write-Host "rekamé"
+Write-Host "scripts done."
 Write-Host "wait a bit, w10 client restarting..."
 Write-Host "process completed.\ndone. "
 
