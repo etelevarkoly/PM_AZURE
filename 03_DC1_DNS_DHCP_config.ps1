@@ -13,7 +13,7 @@ $AZ_GATEWAY = (Get-NetIPConfiguration).Ipv4Defaultgateway | Select-Object -Expan
 # DNS primary zone is created when the forest is generated
 
 # define network ID and file entry
-Add-DnsServerPrimaryZone -NetworkID 172.16.0.0/16 `
+Add-DnsServerPrimaryZone -NetworkID "172.16.0.0/16" `
 -ZoneName "project.local" `
 -ReplicationScope "Forest" `
 -PassThru

@@ -10,11 +10,6 @@ $AD_GROUP_LIST=('Oktatok','Hallgatok')
 $PW = "Password123!"
 $SECURE_PW = ConvertTo-SecureString $PW -AsPlainText -Force
 
-Write-Host "initializing organization unit and user creating script..."
-$pw_TRAINER_DOMAIN_ADMIN= Read-Host -Prompt 'Enter a pw for teacher user: "Trainer"' -AsSecureString
-
-# $AD_USERS_LIST= Import-Csv C:\FILENAME
-
 # create organization units
 Write-Host "creating organization units..."
 foreach ($i in $AD_OU_LIST) {
@@ -41,7 +36,7 @@ foreach ($i in $AD_HALLGATOK_LIST) {
 
 foreach ($i in $AD_OKTATOK_LIST) {
     New-ADUser -Name $i -Path 'OU=Oktatok,DC=project,DC=local' `
-        -AccountPassword $pw_TRAINER_DOMAIN_ADMIN `
+        -AccountPassword $SECURE_PW `
         -PasswordNeverExpires $true `
         -Enabled $true
     Add-ADGroupMember -Identity "Domain Admins" `

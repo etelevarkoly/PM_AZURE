@@ -15,14 +15,21 @@ Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 
 # install root forest for AD DS 
 # don't bother with the errors, it's just windows.
-Install-ADDSForest -DomainName “project.local” `
--ForestMode "7" `
--CreateDnsDelegation: $false `
--NoRebootOnCompletion: $True `
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-CreateDnsDelegation:$false `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainMode "WinThreshold" `
+-DomainName "project.local" `
+-DomainNetbiosName "PROJECT" `
+-ForestMode "WinThreshold" `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$false `
+-SysvolPath "C:\Windows\SYSVOL" `
 -SafeModeAdministratorPassword $SECURE_PW `
--Force
+-Force:$true
 
-Write-Host "need restart, because this is not linux..."
 Restart-Computer -Force
 
 # check if everything is ok
