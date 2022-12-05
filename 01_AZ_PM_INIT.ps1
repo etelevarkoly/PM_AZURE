@@ -176,36 +176,51 @@ az vm run-command invoke `
 
 
 # run scripts on VMs
+# AD DS config
 az vm run-command invoke `
 -name $VM_DC1 `
 --command-id RunPowerShellScript `
 --scripts "C:\02_AD_DS_config.ps1"
 
+Write-Host "wait 5 min for DC1 to restart..."
+Start-Sleep 300
+
+# DC1 dns and dhcp config script
 az vm run-command invoke `
 -name $VM_DC1 `
 --command-id RunPowerShellScript `
 --scripts "C:\03_DC1_DNS_DHCP_config.ps1"
 
+# DC1 OU and User creator script
 az vm run-command invoke `
 -name $VM_DC1 `
 --command-id RunPowerShellScript `
 --scripts "C:\04_DC1_OU_USERS.ps1"
 
+# FS1 config script
 az vm run-command invoke `
 -name $VM_FS1 `
 --command-id RunPowerShellScript `
 --scripts "C:\05_FS1_config.ps1"
 
+Write-Host "wait 5 min for FS1 to restart..."
+Start-Sleep 300
+
+# FS1 folder and SMB script
 az vm run-command invoke `
 -name $VM_FS1 `
 --command-id RunPowerShellScript `
 --scripts "C:\06_FS1_folders_SMB.ps1"
 
+# w10 client script
 az vm run-command invoke `
 -name $VM_CLIENT `
 --command-id RunPowerShellScript `
 --scripts "C:\07_W10_config.ps1"
 
-Write-Host "rekamé"
+# w10 client restarts here, so chill
 
+Write-Host "rekamé"
+Write-Host "wait a bit, w10 client restarting..."
+Write-Host "process completed.\ndone. "
 
