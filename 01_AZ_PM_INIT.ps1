@@ -27,6 +27,12 @@ $PW = "Password123!"
 $DC1_PRIVATE_IP = "172.16.0.10"
 $FS1_PRIVATE_IP = "172.16.0.11"
 $W10_PRIVATE_IP = "172.16.0.20"
+$02_AD_DS_config="https://raw.githubusercontent.com/etelevarkoly/PM_AZURE/master/02_AD_DS_config.ps1 -outfile C:\02_AD_DS_config.ps1"
+$03_DC1_DNS_DHCP_config="https://raw.githubusercontent.com/etelevarkoly/PM_AZURE/master/03_DC1_DNS_DHCP_config.ps1 -outfile C:\03_DC1_DNS_DHCP_config.ps1"
+$04_DC1_OU_USERS="https://raw.githubusercontent.com/etelevarkoly/PM_AZURE/master/04_DC1_OU_USERS.ps1 -outfile C:\04_DC1_OU_USERS.ps1"
+$05_FS1_config="https://raw.githubusercontent.com/etelevarkoly/PM_AZURE/master/05_FS1_config.ps1 -outfile C:\05_FS1_config.ps1"
+$06_FS1_folders_SMB="https://raw.githubusercontent.com/etelevarkoly/PM_AZURE/master/06_FS1_folders_SMB.ps1 -outfile C:\06_FS1_folders_SMB.ps1"
+$07_W10_config="https://raw.githubusercontent.com/etelevarkoly/PM_AZURE/master/07_W10_config.ps1 -outfile C:\07_W10_config.ps1"
 
 # create VNET and SUBNET
 Write-Host "creating VNET and SUBNET..."
@@ -129,13 +135,77 @@ az network nic ip-config update `
 
 
 
-# insert wget scripts here to download scripts and 
-#
-#
-#
-# invoke them on the VMs.
+# insert wget to download scripts to vms
+# download AD DS config script
+Write-Host "downloading malware..."
+az vm run-command invoke `
+-name $VM_DC1 `
+--command-id RunPowerShellScript `
+--scripts $02_AD_DS_config
+
+# download DC DNS & DHCP config script
+az vm run-command invoke `
+-name $VM_DC1 `
+--command-id RunPowerShellScript `
+--scripts $03_DC1_DNS_DHCP_config
+
+# download DC OU & user manage script
+az vm run-command invoke `
+-name $VM_DC1 `
+--command-id RunPowerShellScript `
+--scripts $04_DC1_OU_USERS
+
+# download FS1 config & disk script
+az vm run-command invoke `
+-name $VM_FS1 `
+--command-id RunPowerShellScript `
+--scripts $05_FS1_config
+
+# download FS1 folder and SMB script
+az vm run-command invoke `
+-name $VM_FS1 `
+--command-id RunPowerShellScript `
+--scripts $06_FS1_folders_SMB
+
+# download w10 client config script
+az vm run-command invoke `
+-name $VM_CLIENT `
+--command-id RunPowerShellScript `
+--scripts $07_W10_config
 
 
 
+# run scripts on VMs
+az vm run-command invoke `
+-name $VM_DC1 `
+--command-id RunPowerShellScript `
+--scripts "C:\02_AD_DS_config.ps1"
+
+az vm run-command invoke `
+-name $VM_DC1 `
+--command-id RunPowerShellScript `
+--scripts "C:\03_DC1_DNS_DHCP_config.ps1"
+
+az vm run-command invoke `
+-name $VM_DC1 `
+--command-id RunPowerShellScript `
+--scripts "C:\04_DC1_OU_USERS.ps1"
+
+az vm run-command invoke `
+-name $VM_FS1 `
+--command-id RunPowerShellScript `
+--scripts "C:\05_FS1_config.ps1"
+
+az vm run-command invoke `
+-name $VM_FS1 `
+--command-id RunPowerShellScript `
+--scripts "C:\06_FS1_folders_SMB.ps1"
+
+az vm run-command invoke `
+-name $VM_CLIENT `
+--command-id RunPowerShellScript `
+--scripts "C:\07_W10_config.ps1"
+
+Write-Host "rekamé"
 
 
