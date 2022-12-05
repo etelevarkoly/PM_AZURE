@@ -1,0 +1,129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "networkInterfaceName": {
+            "value": "fs1646"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
+        },
+        "networkSecurityGroupName": {
+            "value": "FS1-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": [
+                {
+                    "name": "RDP",
+                    "properties": {
+                        "priority": 300,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "3389"
+                    }
+                },
+                {
+                    "name": "SSH",
+                    "properties": {
+                        "priority": 320,
+                        "protocol": "TCP",
+                        "access": "Allow",
+                        "direction": "Inbound",
+                        "sourceAddressPrefix": "*",
+                        "sourcePortRange": "*",
+                        "destinationAddressPrefix": "*",
+                        "destinationPortRange": "22"
+                    }
+                }
+            ]
+        },
+        "subnetName": {
+            "value": "etele-PM-subnet1"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/fb56565c-4241-4557-8fc5-38839261e39f/resourceGroups/RG-user16/providers/Microsoft.Network/virtualNetworks/etele-pm-vnet1"
+        },
+        "publicIpAddressName": {
+            "value": "FS1-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineName": {
+            "value": "FS1"
+        },
+        "virtualMachineComputerName": {
+            "value": "FS1"
+        },
+        "virtualMachineRG": {
+            "value": "RG-user16"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "dataDisks": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "deleteOption": "Delete",
+                    "caching": "ReadOnly",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "FS1_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                }
+            ]
+        },
+        "dataDiskResources": {
+            "value": [
+                {
+                    "name": "FS1_DataDisk_0",
+                    "sku": "StandardSSD_LRS",
+                    "properties": {
+                        "diskSizeGB": 4,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                }
+            ]
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2as_v4"
+        },
+        "nicDeleteOption": {
+            "value": "Delete"
+        },
+        "adminUsername": {
+            "value": "evarkoly"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        }
+    }
+}

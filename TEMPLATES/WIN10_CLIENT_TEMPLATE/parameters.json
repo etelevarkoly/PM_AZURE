@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "networkInterfaceName": {
+            "value": "w10client233"
+        },
+        "enableAcceleratedNetworking": {
+            "value": true
+        },
+        "subnetName": {
+            "value": "etele-PM-subnet1"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/fb56565c-4241-4557-8fc5-38839261e39f/resourceGroups/RG-user16/providers/Microsoft.Network/virtualNetworks/etele-pm-vnet1"
+        },
+        "publicIpAddressName": {
+            "value": "W10Client-ip"
+        },
+        "publicIpAddressType": {
+            "value": "Static"
+        },
+        "publicIpAddressSku": {
+            "value": "Standard"
+        },
+        "pipDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineName": {
+            "value": "W10Client"
+        },
+        "virtualMachineComputerName": {
+            "value": "W10Client"
+        },
+        "virtualMachineRG": {
+            "value": "RG-user16"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D2as_v4"
+        },
+        "nicDeleteOption": {
+            "value": "Delete"
+        },
+        "adminUsername": {
+            "value": "evarkoly"
+        },
+        "adminPassword": {
+            "value": null
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        }
+    }
+}
