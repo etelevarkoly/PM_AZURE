@@ -8,7 +8,6 @@
 # az login --use-device-code 
 
 # SCRIPT FOR INSTALL AD DS, DHCP AND DNS ROLE
-# AUTHOR: ETELE VÁRKOLY AND STACKOVERFLOW
 
 Write-Host "Hi bro!"
 
