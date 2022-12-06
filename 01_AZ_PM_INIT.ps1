@@ -196,5 +196,5 @@ az vm run-command invoke --name $VM_CLIENT --command-id RunPowerShellScript --sc
 # w10 client restarts here, so chill
 Write-Host "scripts done."
 Write-Host "wait a bit, w10 client restarting..."
-Write-Host "process completed.\ndone. "
+Write-Host "process completed (and probably failed). done."
 
