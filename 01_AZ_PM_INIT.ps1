@@ -168,7 +168,7 @@ az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scrip
 
 Write-Host "AD DS script done."
 Write-Host "wait 5 min for DC1 to restart..."
-Start-Sleep 300
+Start-Sleep 240
 
 # DC1 dns and dhcp config script
 Write-Host "running DC1 dns dhcp script..."
