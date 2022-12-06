@@ -1,13 +1,12 @@
 # SV3 RÜ - Projektmunka 01
 # Azure AD DS + CORE SRV + W10 CLIENT DEPLOY
-# created by Etele
 
 # these scripts does not require parameters, just run and have fun
 
 # before running this script, first log in to Azure from your terminal
-# az login --use-device-code 
+# f.e.: az login --use-device-code 
 
-# SCRIPT FOR INSTALL AD DS, DHCP AND DNS ROLE
+# SCRIPT FOR DEPLOYING VMs IN AZURE
 
 Write-Host "Hi bro!"
 
