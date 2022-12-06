@@ -167,8 +167,8 @@ Write-Host "running scripts on VMs..."
 az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scripts "C:\02_AD_DS_config.ps1"
 
 Write-Host "AD DS script done."
-Write-Host "wait 5 min for DC1 to restart..."
-Start-Sleep 240
+Write-Host "wait some time (estimated wait time: 8min) for DC1 to restart..."
+Start-Sleep 480
 
 # DC1 dns and dhcp config script
 Write-Host "running DC1 dns dhcp script..."
@@ -182,8 +182,8 @@ az vm run-command invoke --name $VM_DC1 --command-id RunPowerShellScript --scrip
 Write-Host "running FS1 config script..."
 az vm run-command invoke --name $VM_FS1 --command-id RunPowerShellScript --scripts "C:\05_FS1_config.ps1"
 
-Write-Host "wait 5 min for FS1 to restart..."
-Start-Sleep 300
+Write-Host "wait some time for FS1 to restart..."
+Start-Sleep 120
 
 # FS1 folder and SMB script
 Write-Host "running FS1 folder and SMB script..."
