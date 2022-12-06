@@ -15,8 +15,8 @@ $IFIndex = (Get-NetIPAddress | Where-Object IPAddress -eq $W10_PRIVATE_IP).Inter
 Set-DnsClientServerAddress -InterfaceIndex $IFIndex -ServerAddresses ($DC1_PRIVATE_IP,$GOOGLE_DNS)
 
 # enable network discovery and file & print share
-netsh advfirewall firewall set rule group=”network discovery” new enable=yes
-netsh firewall set service type=fileandprint mode=enable profile=all
+netsh advfirewall firewall set rule group="Network Discovery" new enable=Yes
+netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes
 
 # enter client to domain
 Add-Computer -DomainName $DOMAIN_NAME -DomainCredential $cred -Restart
