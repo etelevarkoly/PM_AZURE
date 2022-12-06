@@ -7,7 +7,7 @@ $SECURE_PW = ConvertTo-SecureString $PW -AsPlainText -Force
 # Get-WindowsFeature
 
 # install AD DS
-Write-Host "installing AD Domain Services..."
+# Write-Host "installing AD Domain Services..."
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 
 # list modules for AD DS deployment 

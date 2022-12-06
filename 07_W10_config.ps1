@@ -6,9 +6,9 @@ $DC1_PRIVATE_IP = "172.16.0.10"
 $W10_PRIVATE_IP = "172.16.0.20"
 $GOOGLE_DNS = "8.8.8.8"
 $DOMAIN_NAME = "project.local"
-$USER_LOGIN = "etele.varkoly"
+$DOMAIN_LOGIN = "project\etele.varkoly"
 $PW = ConvertTo-SecureString "Password123!" -AsPlainText -Force
-$cred = New-Object System.Management.Automation.PSCredential ($USER_LOGIN, $PW)
+$cred = New-Object System.Management.Automation.PSCredential ($DOMAIN_LOGIN, $PW)
 
 # set up dns
 $IFIndex = (Get-NetIPAddress | Where-Object IPAddress -eq $W10_PRIVATE_IP).InterfaceIndex

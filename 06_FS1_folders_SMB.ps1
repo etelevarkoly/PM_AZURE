@@ -1,7 +1,7 @@
 # install file-stuff
-Write-Host "installing file share resource manager..."
+# Write-Host "installing file share resource manager..."
 Install-WindowsFeature -Name FS-Resource-Manager -IncludeManagementTools
-Write-Host "installing file share data deduplication stuff..."
+# Write-Host "installing file share data deduplication stuff..."
 Install-WindowsFeature -Name FS-Data-Deduplication
 
 # have to install AD DS, otherwise cannot use Get-ADUser

@@ -7,12 +7,12 @@ $DC1_PRIVATE_IP = "172.16.0.10"
 $FS1_PRIVATE_IP = "172.16.0.11"
 $GOOGLE_DNS = "8.8.8.8"
 $DOMAIN_NAME = "project.local"
-$USER_LOGIN = "etele.varkoly"
+$DOMAIN_LOGIN = "project\etele.varkoly"
 $PW = ConvertTo-SecureString "Password123!" -AsPlainText -Force
-$cred = New-Object System.Management.Automation.PSCredential ($USER_LOGIN, $PW)
+$cred = New-Object System.Management.Automation.PSCredential ($DOMAIN_LOGIN, $PW)
 
 # partitioning and formatting extra disk
-Write-Host "partitioning and formatting extra disk..."
+# Write-Host "partitioning and formatting extra disk..."
 Initialize-Disk -Number $EXTRA_DISK_ID -PartitionStyle GPT
 New-Partition -DiskNumber $EXTRA_DISK_ID -Driveletter "S" -UseMaximumSize
 Format-Volume -DriveLetter "S" -FileSystem NTFS -Confirm: $false

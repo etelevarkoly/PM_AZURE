@@ -11,20 +11,20 @@ $PW = "Password123!"
 $SECURE_PW = ConvertTo-SecureString $PW -AsPlainText -Force
 
 # create organization units
-Write-Host "creating organization units..."
+# Write-Host "creating organization units..."
 foreach ($i in $AD_OU_LIST) {
     New-ADOrganizationalUnit $i -ProtectedFromAccidentalDeletion $false
 }
 
 # create groups
-Write-Host "creating groups for users..."
+# Write-Host "creating groups for users..."
 foreach ($i in $AD_GROUP_LIST) {
     New-ADGroup $i -Path 'OU=Csoportok,DC=project,DC=local' `
         -GroupScope Global
 }
 
 # create users and adding them to groups
-Write-Host "creating users and adding them to the groups..."
+# Write-Host "creating users and adding them to the groups..."
 foreach ($i in $AD_HALLGATOK_LIST) {
     New-ADUser -Name $i `
         -AccountPassword $SECURE_PW `
