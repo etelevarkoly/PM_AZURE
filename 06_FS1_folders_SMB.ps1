@@ -56,16 +56,16 @@ foreach ($ADUser in $ADUsers) {
 }
 
 # define home drive and home folders for users
-# there is no extra drive for Z:\ but the project told me to do this
+# "~" + $ADUser = error.
 foreach ($ADUser in $ADUsers) {
     Set-ADUser $ADUser `
     -HomeDrive "Z:" `
-    -HomeDirectory "\\FS1\Users_SMB\%username%"
+    -HomeDirectory "\\FS1\Users_SMB\$ADUser"
 }
 
 # check quotas
 # Get-FsrmQuota
 
 # enable network discovery and file & print share
-netsh advfirewall firewall set rule group=”network discovery” new enable=yes
-netsh firewall set service type=fileandprint mode=enable profile=all
+netsh advfirewall firewall set rule group="Network Discovery" new enable=Yes
+netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes
