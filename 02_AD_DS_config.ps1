@@ -34,3 +34,4 @@ Restart-Computer -Force
 
 # check if everything is ok
 # Get-ADDomain
+

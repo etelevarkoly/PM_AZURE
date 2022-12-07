@@ -69,3 +69,4 @@ foreach ($ADUser in $ADUsers) {
 # enable network discovery and file & print share
 netsh advfirewall firewall set rule group="Network Discovery" new enable=Yes
 netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes
+

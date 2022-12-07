@@ -29,3 +29,4 @@ Add-Computer -DomainName $DOMAIN_NAME -DomainCredential $cred -Restart
 
 # check domain
 # systeminfo | findstr /i "domain"
+
