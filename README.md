@@ -8,9 +8,3 @@ One extra drive.
 File sharing.
 AD DS and domain controller stuff.
 one client VM.
-
-idk what im doing
-
-plz send help
-
-this is still under testing...
